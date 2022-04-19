@@ -114,7 +114,7 @@ class App(tkinter.Tk):
     """ help """
 
     def github(self):
-        lien_github='https://github.com/Angel-Dijoux/Code-Cesar/tree/main'
+        lien_github='https://github.com/Angel-Dijoux/tri_par_tas/blob/main/headsort.py'
         return webbrowser.open(lien_github)
 
     def instagram(self):
