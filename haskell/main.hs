@@ -1,3 +1,1 @@
-class Headsort h where {
-    
-}
+class Headsort h
