@@ -1,14 +1,16 @@
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
 class Headsort {
-    private ArrayList<Integer> liste = new ArrayList<Integer>();
+    private List<Integer> liste = new ArrayList<>();
 
     // Constructor
 
-    public Headsort(ArrayList<Integer> liste) {
+    public Headsort() {
+    }
+
+    public Headsort(List<Integer> liste) {
         this.liste = liste;
     }
 
@@ -26,15 +28,16 @@ class Headsort {
         return (i - 1) / 2;
     }
 
-    public boolean est_tas() {
-        for (int i = 1; i < this.liste.size();) {
-            if (this.liste.get(this.pere(i)) < this.liste.get(i)) {
+    public boolean estTas() {
+        for (int i = 0; i < (this.liste.size() - 2) / 2; i++) {
+            if (this.liste.get(this.gauche(i)) > this.liste.get(i)) {
                 return false;
-            } else {
-                return true;
+            }
+            if (this.droite(i) < this.liste.size() && this.liste.get(this.droite(i)) > this.liste.get(i)) {
+                return false;
             }
         }
-        return false;
+        return true;
     }
 
     public Integer maximun(int i, int lim) {
@@ -51,16 +54,16 @@ class Headsort {
     }
 
     public void entasser(int i, int lim) {
-        System.out.println(i + " In enttasser");
         int maxi = this.maximun(i, lim);
         if (maxi != i) {
-            this.liste.set(this.liste.lastIndexOf(i), maxi);
-            this.liste.set(this.liste.lastIndexOf(maxi), i);
+            int temp = this.liste.get(i);
+            this.liste.set(i, this.liste.get(maxi));
+            this.liste.set(maxi, temp);
             this.entasser(maxi, lim);
         }
     }
 
-    public void ContruireTas() {
+    public void buildheap() {
         ArrayList<Integer> newListe = new ArrayList<>(this.liste);
         Collections.reverse(newListe);
         for (int i = newListe.size() - 1; i >= 0; i--) {
@@ -68,12 +71,12 @@ class Headsort {
         }
     }
 
-    public ArrayList<Integer> Trier_par_tas() {
-        this.ContruireTas();
-        System.out.println("Finish");
+    public List<Integer> trierParTas() {
+        this.buildheap();
         for (int i = liste.size() - 1; i > 0; i--) {
-            this.liste.set(this.liste.indexOf(0), this.liste.get(i));
-            this.liste.set(this.liste.indexOf(i), this.liste.indexOf(0));
+            int temp = this.liste.get(0);
+            this.liste.set(0, this.liste.get(i));
+            this.liste.set(i, temp);
             this.entasser(0, i);
         }
         return this.liste;
