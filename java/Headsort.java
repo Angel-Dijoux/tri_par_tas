@@ -73,7 +73,7 @@ class Headsort {
 
     public List<Integer> trierParTas() {
         this.buildheap();
-        for (int i = liste.size() - 1; i > 0; i--) {
+        for (int i = this.liste.size() - 1; i > 0; i--) {
             int temp = this.liste.get(0);
             this.liste.set(0, this.liste.get(i));
             this.liste.set(i, temp);

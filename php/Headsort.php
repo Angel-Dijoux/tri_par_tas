@@ -37,4 +37,49 @@ class Headsort
         }
         return true;
     }
+
+    public function maximun(int $i, int $lim): int
+    {
+        $maxi = $i;
+        $g = $this->gauche($i);
+        $d = $this->droite($i);
+        if ($g < $lim && $this->liste[$g] > $this->liste[$maxi]) {
+            $maxi = $g;
+        }
+        if ($d < $lim && $this->liste[$d] > $this->liste[$maxi]) {
+            $maxi = $d;
+        }
+        return $maxi;
+    }
+
+    public function entasser(int $i, int $lim)
+    {
+        $maxi = $this->maximun($i, $lim);
+        if ($maxi != $i) {
+            $temp = $this->liste[$i];
+            $this->liste[$i] = $this->liste[$maxi];
+            $this->liste[$maxi] = $temp;
+            $this->entasser($maxi, $lim);
+        }
+    }
+
+    public function buildheap()
+    {
+        $newListe = array_reverse($this->liste);
+        for ($i = count($newListe) - 1; $i >= 0; $i--) {
+            $this->entasser($i, count($newListe));
+        }
+    }
+
+    public function trierParTas(): array
+    {
+        $this->buildheap();
+        for ($i = (count($this->liste) - 1); $i > 0; $i--) {
+            $temp = $this->liste[0];
+            $this->liste[0] = $this->liste[$i];
+            $this->liste[$i] = $temp;
+            $this->entasser(0, $i);
+        }
+        return $this->liste;
+    }
 }

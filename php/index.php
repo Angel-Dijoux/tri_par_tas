@@ -3,8 +3,17 @@ namespace php;
 
 require_once 'Headsort.php';
 
-$liste = array(10, 12, 8, 7, 6, 5, 345, 3, 2, 1);
+function generateRandomIntList(int $size): array
+{
+    $randomNumbers = array();
+    for ($i = 0; $i < $size; $i++) {
+        array_push($randomNumbers, rand(0, 100));
+    }
+    return $randomNumbers;
+}
+
+$liste = generateRandomIntList(15);
 $obj = new Headsort($liste);
 
 
-var_dump($obj->estTas());
+print(implode(',', $obj->trierParTas()));
