@@ -1,18 +1,20 @@
-class Headsort {
-  constructor(liste) {
+export class Headsort {
+  liste: number[];
+
+  constructor(liste: number[]) {
     this.liste = liste;
   }
-  gauche(i) {
+  gauche(i: number): number {
     return i * 2 + 1;
   }
-  droite(i) {
+  droite(i: number): number {
     return i * 2 + 2;
   }
-  pere(i) {
+  pere(i: number): number {
     return (i - 1) / 2;
   }
 
-  estTas() {
+  estTas(): boolean {
     for (let i = 0; i < this.liste.length - 2; i++) {
       if (this.liste[this.gauche(i)] > this.liste[i]) {
         return false;
@@ -27,7 +29,7 @@ class Headsort {
     return true;
   }
 
-  maximun(i, lim) {
+  maximun(i: number, lim: number): number {
     let maxi = i;
     const g = this.gauche(i);
     const d = this.droite(i);
@@ -40,5 +42,3 @@ class Headsort {
     return maxi;
   }
 }
-
-module.exports = Headsort;
