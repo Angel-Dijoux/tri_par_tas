@@ -41,4 +41,32 @@ export class Headsort {
     }
     return maxi;
   }
+  entasser(i: number, lim: number) {
+    let maxi = this.maximun(i, lim);
+    if (maxi != i) {
+      let tmp = this.liste[i];
+      this.liste[i] = this.liste[maxi];
+      this.liste[maxi] = tmp;
+      this.entasser(maxi, lim);
+    }
+  }
+
+  builHeap() {
+    const newListe: number[] = this.liste;
+    newListe.reverse();
+    for (let i = this.liste.length - 1; i >= 0; i--) {
+      this.entasser(i, newListe.length);
+    }
+  }
+
+  trierParTas(): number[] {
+    this.builHeap();
+    for (let i = this.liste.length - 1; i > 0; i--) {
+      let tmp = this.liste[0];
+      this.liste[0] = this.liste[i];
+      this.liste[i] = tmp;
+      this.entasser(0, i);
+    }
+    return this.liste;
+  }
 }

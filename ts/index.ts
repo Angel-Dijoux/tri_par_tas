@@ -1,5 +1,5 @@
 import { Headsort } from "./Headsort";
 
-const myobj = new Headsort([12, 3, 4]);
+const myobj = new Headsort([1, 2, 4, 12, 56, 5, 7, 2345, 5, -1, 65, 6]);
 
-console.log(myobj.droite(4), "is build");
+console.log(myobj.trierParTas());

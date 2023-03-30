@@ -38,6 +38,32 @@ var Headsort = /** @class */ (function () {
         }
         return maxi;
     };
+    Headsort.prototype.entasser = function (i, lim) {
+        var maxi = this.maximun(i, lim);
+        if (maxi != i) {
+            var tmp = this.liste[i];
+            this.liste[i] = this.liste[maxi];
+            this.liste[maxi] = tmp;
+            this.entasser(maxi, lim);
+        }
+    };
+    Headsort.prototype.builHeap = function () {
+        var newListe = this.liste;
+        newListe.reverse();
+        for (var i = this.liste.length - 1; i >= 0; i--) {
+            this.entasser(i, newListe.length);
+        }
+    };
+    Headsort.prototype.trierParTas = function () {
+        this.builHeap();
+        for (var i = this.liste.length - 1; i > 0; i--) {
+            var tmp = this.liste[0];
+            this.liste[0] = this.liste[i];
+            this.liste[i] = tmp;
+            this.entasser(0, i);
+        }
+        return this.liste;
+    };
     return Headsort;
 }());
 exports.Headsort = Headsort;
